@@ -70,7 +70,7 @@ import { AnsibleCreatorInit } from "./features/contentCreator/initPage";
 import { withInterpreter } from "./features/utils/commandRunner";
 import { IFileSystemWatchers } from "./interfaces/watchers";
 import { LightspeedAuthSession } from "./interfaces/lightspeed";
-import { showPlaybookGenerationPage } from "./features/playbookGeneration/playbookGenerationPage";
+import { showPlaybookGenerationPage } from "./features/lightspeed/playbookGeneration";
 
 export let client: LanguageClient;
 export let lightSpeedManager: LightSpeedManager;
@@ -157,7 +157,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
   lightSpeedManager = new LightSpeedManager(
     context,
     client,
-    lsClient,
     extSettings,
     telemetry
   );
@@ -487,9 +486,14 @@ export async function activate(context: ExtensionContext): Promise<void> {
   // Command to render a webview-based note view
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "ansible.lightspeed.showPlaybookGenerationPage",
+      LightSpeedCommands.LIGHTSPEED_PLAYBOOK_GENERATION,
       () => {
-        showPlaybookGenerationPage(context.extensionUri);
+        showPlaybookGenerationPage(
+          context.extensionUri,
+          client,
+          lightSpeedManager.lightSpeedAuthenticationProvider,
+          lightSpeedManager.settingsManager
+        );
       }
     )
   );

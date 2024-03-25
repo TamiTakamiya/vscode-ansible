@@ -16,3 +16,4 @@ ignorePaths:
   - syntaxes/external/*.*
   - media
   - package.json
+  - test/testFixtures/lightspeed/*.yml
