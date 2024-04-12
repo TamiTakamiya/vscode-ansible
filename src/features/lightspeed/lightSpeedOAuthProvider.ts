@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable tsdoc/syntax */
+
 import {
   authentication,
   AuthenticationProvider,
@@ -108,7 +108,7 @@ export class LightSpeedAuthenticationProvider
 
   /**
    * Get the existing sessions
-   * @param scopes
+   * @param scopes - Scopes
    * @returns
    */
   public async getSessions(): Promise<readonly LightspeedAuthSession[]> {
@@ -123,7 +123,7 @@ export class LightSpeedAuthenticationProvider
 
   /**
    * Create a new auth session
-   * @param scopes
+   * @param scopes - Scopes
    * @returns
    */
   public async createSession(scopes: string[]): Promise<LightspeedAuthSession> {
@@ -204,7 +204,7 @@ export class LightSpeedAuthenticationProvider
 
   /**
    * Remove an existing session
-   * @param sessionId
+   * @param sessionId - Session ID
    */
   public async removeSession(sessionId: string): Promise<void> {
     const allSessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
